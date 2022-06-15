@@ -34,9 +34,10 @@ const BlacklistedVendorsSchema = new mongoose.Schema({
         default: true
     },
     category: {
-        type: String,
-        default: 'Blacklisted',
-        enum: ['Blacklisted', 'Highly Cautious', 'Cautious']
+        type: Number,
+        ref : 'Category',
+        default: 1,
+        
     }
 }, { timestamps: true })
 

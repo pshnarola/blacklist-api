@@ -77,7 +77,6 @@ exports.addReqToBlacklist = (req,res)=>{
         BlacklistVendersReq.findById(id).exec(async(err,vendor)=>{
             if (err) return res.status(400).json(err);
             if(vendor){
-                console.log(vendor);
                 const venderValues = BlacklistedVendors({
                     vendorName : vendor.vendorName,
                     address : vendor.address,

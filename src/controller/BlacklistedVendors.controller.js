@@ -1,5 +1,5 @@
 const BlacklistedVendors = require('../models/BlacklistedVendors.model')
-
+require('../models/Category.model')
 exports.addToBlacklist =  async(req,res)=>{
     const {vendorName, address, reason} = req.body
     const venderValues = {
@@ -35,7 +35,7 @@ exports.addToBlacklist =  async(req,res)=>{
 
 exports.listOfBlackListVendor = async(req,res)=>{
     try{
-        const blacklistedVendors = await BlacklistedVendors.find({isActive : true})
+        const blacklistedVendors = await BlacklistedVendors.find({isActive : true}).populate('category')
         if(blacklistedVendors){
             return res.status(200).json(blacklistedVendors)
         }else{
@@ -98,7 +98,7 @@ exports.removeToBlacklist =  (req,res)=>{
                     { new: true }
                   );
                   return res.status(200).json({
-                    message: "Vendor is Remove to Blacklist",
+                    message: "Vendor is Removed from Blacklist",
                   });
                 } else {
                   await BlacklistedVendors.updateOne(
